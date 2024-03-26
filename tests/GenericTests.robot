@@ -10,7 +10,6 @@ ${randInt}
 *** Test Cases ***
 Test Case 001
     [Documentation]    This test case will Pass
-    [Setup]            start message
     ${num}=    Set Variable    1
     Log Variables              level=WARN
 
