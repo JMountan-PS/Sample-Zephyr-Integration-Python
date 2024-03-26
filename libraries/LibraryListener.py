@@ -3,7 +3,7 @@ from robot.result.model import TestSuite as SuiteResult, TestCase as TestResult
 from robot.api import logger
 import requests
 
-class ParamListener:
+class LibraryListener:
 
     ROBOT_LIBRARY_SCOPE = 'SUITE'
     ROBOT_LISTENER_API_VERSION = 3
@@ -35,3 +35,6 @@ class ParamListener:
             self.pass_count += 1
         if result.status == 'FAIL':
             self.fail_count += 1
+
+    def start_message(self):
+        logger.console("Library listener started")
