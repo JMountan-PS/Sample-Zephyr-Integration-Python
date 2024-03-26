@@ -11,6 +11,7 @@ ${randInt}
 Test Case 001
     [Documentation]    This test case will Pass
     ${num}=    Set Variable    1
+    Log Variables              level=WARN
 
 Test Case 002
     [Documentation]    This test case will Fail
