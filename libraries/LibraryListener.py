@@ -15,7 +15,7 @@ class LibraryListener:
         self.fail_count = 0
 
     def start_suite(self, data, result):
-        Maybe set the suite status as running in Zephyr?
+        #Maybe set the suite status as running in Zephyr?
         logger.console(f"---LIBRARY LISTENER--- starting a suite: {data.test_class}")
 
     def end_suite(self, data, result):
