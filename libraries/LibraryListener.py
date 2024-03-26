@@ -4,7 +4,8 @@ from robot.api import logger
 import requests
 
 class LibraryListener:
-
+    
+    #See https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#listener-version-3 for data/result attributes
     ROBOT_LIBRARY_SCOPE = 'SUITE'
     ROBOT_LISTENER_API_VERSION = 3
 
@@ -13,8 +14,9 @@ class LibraryListener:
         self.pass_count = 0
         self.fail_count = 0
 
-    #def start_suite(self, data, result):
-        # Maybe set the suite status as running in Zephyr?
+    def start_suite(self, data, result):
+        Maybe set the suite status as running in Zephyr?
+        logger.console(f"---LIBRARY LISTENER--- starting a suite: {data.test_class}")
 
     def end_suite(self, data, result):
         # Use self.pass_count and self.fail_count and send results
