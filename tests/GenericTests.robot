@@ -1,7 +1,7 @@
 *** Settings ***
 Library        DateTime
 Library        String
-#Library        ../Libraries/StatusListener.py
+Library        ../libraries/LibraryListener.py
 Suite Setup    Set Random Gen
 
 *** Variables ***
