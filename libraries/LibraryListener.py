@@ -5,10 +5,11 @@ import requests
 
 class ParamListener:
 
-    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
+    ROBOT_LIBRARY_SCOPE = 'SUITE'
     ROBOT_LISTENER_API_VERSION = 3
 
     def __init__(self):
+        self.ROBOT_LIBRARY_LISTENER = self
         self.pass_count = 0
         self.fail_count = 0
 
