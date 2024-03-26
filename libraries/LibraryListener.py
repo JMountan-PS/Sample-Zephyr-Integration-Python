@@ -26,11 +26,11 @@ class LibraryListener:
 
     def start_test(self, data, result):
         logger.console("\n")
-        logger.console(f"---PARAM LISTENER--- starting a test {data.name}")
+        logger.console(f"---LIBRARY LISTENER--- starting a test {data.name}")
 
     def end_test(self, data, result):
         logger.console("\n")
-        logger.console(f"---PARAM LISTENER--- ending a test {data.name}")
+        logger.console(f"---LIBRARY LISTENER--- ending a test {data.name}")
         if result.status == 'PASS':
             self.pass_count += 1
         if result.status == 'FAIL':
