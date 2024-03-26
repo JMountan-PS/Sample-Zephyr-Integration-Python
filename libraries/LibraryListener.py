@@ -1,5 +1,3 @@
-from robot.running.model import TestSuite as SuiteData, TestCase as TestData
-from robot.result.model import TestSuite as SuiteResult, TestCase as TestResult
 from robot.api import logger
 import requests
 
