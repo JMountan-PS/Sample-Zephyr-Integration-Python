@@ -12,7 +12,7 @@ class zephyr_rest:
 
 
     def __init__(self):
-        self.active_session = requests.Session()
+        self.auth_session = requests.Session()
 
     #auth method assuming personal access token
     def set_auth_pat(self, personal_access_token):
@@ -36,11 +36,22 @@ class zephyr_rest:
         self.headers = {"Content-Type":"application/json",
                         "audience":"jire.uberinternal.com",
                         "grant_type":"client_credentials"}
-        response = self.auth_session.post(f"{zephyr_rest.base_url}/oauth2/token",headers=self.headers)
+        response = self.auth_session.post(f"{zephyr_rest.base_url}oauth2/token",headers=self.headers)
         logger.console(response.status_code)
         logger.console(response.reason)
+        self.access_token = json.loads(response.text)['access_token']
 
         return json.loads(response.text)['access_token']
 
+    #Post result after gathering an access token
     def update_tc_result(self, status, key, comment, name)
-        self.
+        self.active_session = requests.Session()
+        self.body = {"status":status,
+                     "testCaseKey":key,
+                     "comment":comment,
+                     "name":name}
+        self.headers = {"Content_Type":"application/json",
+                        "Authorization":f"Bearer {self.access_token}"}
+        response = self.active_session.post(f"{zephyr_rest.base_url}testrun/ITEBIZSYS-C13771/testresults",
+                                            data=self.body,
+                                            headers=self.headers)
