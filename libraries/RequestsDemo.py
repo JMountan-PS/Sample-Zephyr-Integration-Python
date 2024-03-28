@@ -53,7 +53,7 @@ class salesforce_rest:
  #                            '',
  #                            '',
   #                           'jmountan@copado.admin.com',
-  #                           'DevTest1234!')
+  #                           '')
 #account_id = sf_session.create_record('Account','{"Name":"ExampleFromAPI"}')
 
 
