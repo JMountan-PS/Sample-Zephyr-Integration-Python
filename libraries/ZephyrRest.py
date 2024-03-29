@@ -57,4 +57,4 @@ class zephyr_rest:
                                             data=self.body,
                                             headers=self.headers)
 
-def Quick Example 
+def Quick_Example 
