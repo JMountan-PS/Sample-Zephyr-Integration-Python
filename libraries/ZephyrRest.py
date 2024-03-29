@@ -4,7 +4,7 @@ from robot.api import logger
 
 class zephyr_rest:
 
-    base_url = 'http://your-jira-host:port/your-jira-context/rest/atm/1.0/'
+    base_url = 'https://usso.uberinternal.com/'
     #replace <your-jira-host>, <port>, <your-jira-context>
 
 
