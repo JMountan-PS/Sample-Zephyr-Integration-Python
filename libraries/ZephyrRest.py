@@ -35,7 +35,8 @@ class zephyr_rest:
         self.auth_session.auth = (client_id,client_secret)
         self.headers = {"Content-Type":"application/json",
                         "audience":"jire.uberinternal.com",
-                        "grant_type":"client_credentials"}
+                        "grant_type":"client_credentials"
+                        "scope":"openid"}
         response = self.auth_session.post(f"{zephyr_rest.base_url}oauth2/token",headers=self.headers)
         logger.console(response.status_code)
         logger.console(response.reason)
