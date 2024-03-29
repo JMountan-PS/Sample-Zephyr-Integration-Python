@@ -2,6 +2,7 @@
 Library        DateTime
 Library        String
 Library        ../libraries/LibraryListener.py
+Library        ../libraries/ZephyrRest.py
 Suite Setup    Set Random Gen
 
 *** Variables ***
