@@ -1,5 +1,6 @@
 from robot.api import logger
 import requests
+import zephyr_rest
 
 class ParamListener:
 
