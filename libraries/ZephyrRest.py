@@ -56,3 +56,5 @@ class zephyr_rest:
         response = self.active_session.post(f"{zephyr_rest.base_url}testrun/ITEBIZSYS-C13771/testresults",
                                             data=self.body,
                                             headers=self.headers)
+
+def Quick Example 
