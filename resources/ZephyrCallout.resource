@@ -7,6 +7,7 @@ Library                      ExcelLibrary
 *** Variables ***
 ${access_token}
 ${new_cycle_id}
+${needs_reporting}
 
 *** Keywords ***
 Authorize Zephyr API
@@ -27,6 +28,9 @@ Authorize Zephyr API
 
 Start New Test Cycle
     [Arguments]              ${tc_name}
+
+    #Open Excel Spreadsheet and find the appropriate mapping
+    
 
     ${headers_cycle}=        Create Dictionary           Authorization=${access_token}                           Content-Type=application/json
     Create Session           postsession_cycle           ${base_url1}                headers=${headers_cycle}    verify=true
