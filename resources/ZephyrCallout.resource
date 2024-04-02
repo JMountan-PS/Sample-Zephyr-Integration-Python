@@ -3,6 +3,8 @@ Library               Collections
 Library               String
 Library               RequestsLibrary
 
+*** Variables ***
+${access_token}
 
 *** Keywords ***
 Post New Result
@@ -18,4 +20,7 @@ Post New Result
 
     ${json}=          Set Variable         ${response.json()}
     Convert To Dictionary                  ${json}
-    ${id}=                        Get Values From Json                      ${json}                        access_token
+    ${id}=                        Get value from json                      ${json}                        access_token
+    Log To Console                ${id}[0]
+    ${access_token}=              Set Variable                        Bearer${SPACE}${id}[0]
+    Set Global Variable           ${access_token}
