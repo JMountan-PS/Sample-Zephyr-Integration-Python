@@ -6,9 +6,9 @@ Library        String
 Resource        ../resources/ZephyrCallout.resource
 
 #These three will be needed to implement a "listener" using only RF syntax
-Suite Setup    Setup Work
-Test Setup    Start New Test Cycle    ${TEST NAME}
-Test Teardown    Post New Result    ${TEST NAME}    ${TEST STATUS}    ${TEST MESSAGE}
+Suite Setup    Setup Work                                                                #Authorize with this call
+Test Setup    Start New Test Cycle    ${TEST NAME}                                       #Start Cycle before test case run
+Test Teardown    Post New Result    ${TEST NAME}    ${TEST STATUS}    ${TEST MESSAGE}    #Update Cycle after test case run
 
 *** Test Cases ***
 Test Case 001
