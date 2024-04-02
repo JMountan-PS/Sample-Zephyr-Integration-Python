@@ -25,8 +25,16 @@ Authorize Zephyr API
 
 Start New Test Cycle
     [Arguments]       ${tc_name}
+    
+    ${headers_cycle}=    Create Dictionary    Authorization=${access_token}    Content-Type=application/json
+    Create Session       postsession_cycle    ${base_url1}                   headers=${headers_cycle}     verify=true
+    ${response_cycle}=                        Post On Session                postsession_cycle            
+    ...                                       /rest/atm/1.0/testrun
+    ...                                       data={"projectKey": "ITEBIZSYS" ,"name": "DirectOpportunity" ,"folder": "/Delivery/DirectOpportunity"}
+    ...                                       headers=${headers_cycle}
 
-    #Start new cycle using excel spreadsheet
+
+
 
 Post New Result
     [Arguments]       ${tc_name}           ${tc_status}                ${tc_message}
