@@ -2,6 +2,7 @@
 Library                      Collections
 Library                      String
 Library                      RequestsLibrary
+Library                      ExcelLibrary
 
 *** Variables ***
 ${access_token}
