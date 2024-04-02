@@ -7,7 +7,7 @@ Library               RequestsLibrary
 ${access_token}
 
 *** Keywords ***
-Post New Result
+Authorize Zephyr API
     [Arguments]       ${tc_name}           ${tc_status}                ${tc_message}
 
     ${auth}=          Create List          ${Client_Id_Zephyr}         ${Client_Secret_Zephyr}
