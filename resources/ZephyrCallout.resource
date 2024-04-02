@@ -35,6 +35,7 @@ Start New Test Cycle
 
     #Check if this test case is in the list
     ${needs_reporting}=      Run Keyword And Return Status                           List Should Contain Value                   ${tc_names_list}    ${tc_name}
+    Set Suite Variable       ${needs_reporting}
     IF                       ${needs_reporting}
 
         ${zeroed_index}=     Get Index From List         ${tc_names_list}            ${tc_name}
@@ -60,10 +61,12 @@ Start New Test Cycle
 Post New Result
     [Arguments]              ${tc_name}                  ${tc_status}                ${tc_message}
 
-    ${headers_result}=       Create Dictionary           Authorization=${access_token}                           Content-Type=application/json
-    Create Session           postsession                 ${base_url1}                headers=${headers_result}                   verify=true
+    IF                       ${needs_reporting}
+        ${headers_result}=                               Create Dictionary           Authorization=${access_token}               Content-Type=application/json
+        Create Session       postsession                 ${base_url1}                headers=${headers_result}                   verify=true
 
-    ${response_result}=      Post On Session             postsession
-    ...                      /rest/atm/1.0/testrun/${new_cycle_id}/testresults
-    ...                      data=[{"status": "Pass" ,"testCaseKey": "ITEBIZSYS-T1903" ,"comment": "Testcase executed successfully" ,"executionTime": "1721"}]
-    ...                      headers=${headers_result}
+        ${response_result}=                              Post On Session             postsession
+        ...                  /rest/atm/1.0/testrun/${new_cycle_id}/testresults
+        ...                  data=[{"status": "Pass" ,"testCaseKey": "ITEBIZSYS-T1903" ,"comment": "Testcase executed successfully" ,"executionTime": "1721"}]
+        ...                  headers=${headers_result}
+    END
