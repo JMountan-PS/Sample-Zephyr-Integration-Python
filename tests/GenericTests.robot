@@ -1,8 +1,8 @@
 *** Settings ***
 Library        DateTime
 Library        String
-Library        ../libraries/LibraryListener.py
-Library        ../libraries/ZephyrRest.py
+# Library        ../libraries/LibraryListener.py
+# Library        ../libraries/ZephyrRest.py
 Resource        ../resources/ZephyrCallout.resource
 Suite Setup    Set Random Gen
 Test Teardown    Post New Result    ${TEST NAME}    ${TEST STATUS}    ${TEST MESSAGE}
