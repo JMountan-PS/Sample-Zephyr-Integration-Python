@@ -4,11 +4,11 @@ Library        String
 # Library        ../libraries/LibraryListener.py
 # Library        ../libraries/ZephyrRest.py
 Resource        ../resources/ZephyrCallout.resource
-Suite Setup    Setup Work
-Test Teardown    Post New Result    ${TEST NAME}    ${TEST STATUS}    ${TEST MESSAGE}
 
-*** Variables ***
-${randInt}
+#These three will be needed to implement a "listener" using only RF syntax
+Suite Setup    Setup Work
+Test Setup    Start New Test Cycle    ${TEST NAME}
+Test Teardown    Post New Result    ${TEST NAME}    ${TEST STATUS}    ${TEST MESSAGE}
 
 *** Test Cases ***
 Test Case 001
