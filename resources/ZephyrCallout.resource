@@ -24,36 +24,46 @@ Authorize Zephyr API
     ${id}=                   Get value from json         ${json}                     access_token
     Log To Console           ${id}[0]
     ${access_token}=         Set Variable                Bearer${SPACE}${id}[0]
-    Set Suite Variable      ${access_token}
+    Set Suite Variable       ${access_token}
 
 Start New Test Cycle
     [Arguments]              ${tc_name}
 
     #Open Excel Spreadsheet and find the appropriate mapping
-    
+    ${doc}=                  Open Excel Document         ../data/Example_tc_map.xlsx                             doc_id=tc_map
+    ${tc_names_list}=        Read Excel Column           col_num=1
 
-    ${headers_cycle}=        Create Dictionary           Authorization=${access_token}                           Content-Type=application/json
-    Create Session           postsession_cycle           ${base_url1}                headers=${headers_cycle}    verify=true
-    ${response_cycle}=       Post On Session             postsession_cycle
-    ...                      /rest/atm/1.0/testrun
-    ...                      data={"projectKey": "ITEBIZSYS" ,"name": "DirectOpportunity" ,"folder": "/Delivery/DirectOpportunity"}
-    ...                      headers=${headers_cycle}
+    #Check if this test case is in the list
+    ${needs_reporting}=      Run Keyword And Return Status                           List Should Contain Value                   ${tc_names_list}    ${tc_name}
+    IF                       ${needs_reporting}
 
-    ${json}=                 Set Variable                ${response_cycle.json()}
-    Convert To Dictionary    ${json}
-    ${new_cycle}=            Get value from json         ${json}                     key
-    Log To Console           ${new_cycle}[0]
-    ${new_cycle_id}=         Set Variable                ${new_cycle}[0]
-    Set Suite Variable      ${new_cycle_id}
+        ${zeroed_index}=     Get Index From List         ${tc_names_list}            ${tc_name}
+        ${fixed_index}=      Evaluate                    ${zeroed_index} + 1
+        ${tc_key}=           Read Excel Cell             row_num=${fixed_index}      col_num=2
 
+
+        ${headers_cycle}=    Create Dictionary           Authorization=${access_token}                           Content-Type=application/json
+        Create Session       postsession_cycle           ${base_url1}                headers=${headers_cycle}    verify=true
+        ${response_cycle}=                               Post On Session             postsession_cycle
+        ...                  /rest/atm/1.0/testrun
+        ...                  data={"projectKey": "${tc_key}" ,"name": "DirectOpportunity" ,"folder": "/Delivery/DirectOpportunity"}
+        ...                  headers=${headers_cycle}
+
+        ${json}=             Set Variable                ${response_cycle.json()}
+        Convert To Dictionary                            ${json}
+        ${new_cycle}=        Get value from json         ${json}                     key
+        Log To Console       ${new_cycle}[0]
+        ${new_cycle_id}=     Set Variable                ${new_cycle}[0]
+        Set Suite Variable                               ${new_cycle_id}
+    END
 
 Post New Result
     [Arguments]              ${tc_name}                  ${tc_status}                ${tc_message}
-    
-    ${headers_result}=       Create Dictionary           Authorization=${access_token}     Content-Type=application/json
-    Create Session           postsession                 ${base_url1}                      headers=${headers_result}    verify=true
 
-    ${response_result}=      Post On Session             postsession                       
-    ...                                              /rest/atm/1.0/testrun/${new_cycle_id}/testresults
-    ...                                              data=[{"status": "Pass" ,"testCaseKey": "ITEBIZSYS-T1903" ,"comment": "Testcase executed successfully" ,"executionTime": "1721"}]
-    ...                                              headers=${headers_result}
+    ${headers_result}=       Create Dictionary           Authorization=${access_token}                           Content-Type=application/json
+    Create Session           postsession                 ${base_url1}                headers=${headers_result}                   verify=true
+
+    ${response_result}=      Post On Session             postsession
+    ...                      /rest/atm/1.0/testrun/${new_cycle_id}/testresults
+    ...                      data=[{"status": "Pass" ,"testCaseKey": "ITEBIZSYS-T1903" ,"comment": "Testcase executed successfully" ,"executionTime": "1721"}]
+    ...                      headers=${headers_result}
