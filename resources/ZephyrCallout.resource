@@ -22,3 +22,11 @@ Authorize Zephyr API
     Log To Console                ${id}[0]
     ${access_token}=              Set Variable                        Bearer${SPACE}${id}[0]
     Set Global Variable           ${access_token}
+
+Start New Test Cycle
+    [Arguments]       ${tc_name}
+
+    #Start new cycle using excel spreadsheet
+
+Post New Result
+    [Arguments]       ${tc_name}           ${tc_status}                ${tc_message}
