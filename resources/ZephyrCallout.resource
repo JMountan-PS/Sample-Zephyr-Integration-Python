@@ -8,6 +8,7 @@ Library                      ExcelLibrary
 ${access_token}
 ${new_cycle_id}
 ${needs_reporting}
+${tc_key}
 
 *** Keywords ***
 Authorize Zephyr API
@@ -41,6 +42,7 @@ Start New Test Cycle
         ${zeroed_index}=     Get Index From List         ${tc_names_list}            ${tc_name}
         ${fixed_index}=      Evaluate                    ${zeroed_index} + 1
         ${tc_key}=           Read Excel Cell             row_num=${fixed_index}      col_num=2
+        Set Suite Variable                        ${tc_key}
 
 
         ${headers_cycle}=    Create Dictionary           Authorization=${access_token}                           Content-Type=application/json
@@ -67,6 +69,6 @@ Post New Result
 
         ${response_result}=                              Post On Session             postsession
         ...                  /rest/atm/1.0/testrun/${new_cycle_id}/testresults
-        ...                  data=[{"status": "Pass" ,"testCaseKey": "ITEBIZSYS-T1903" ,"comment": "Testcase executed successfully" ,"executionTime": "1721"}]
+        ...                  data=[{"status": "${tc_status}" ,"testCaseKey": "${tc_key}" ,"comment": "${tc_message}" ,"executionTime": "1721"}]
         ...                  headers=${headers_result}
     END
