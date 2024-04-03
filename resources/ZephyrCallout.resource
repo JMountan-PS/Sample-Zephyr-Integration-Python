@@ -63,10 +63,16 @@ Start New Test Cycle
         Set Suite Variable                               ${new_cycle_id}
     END
 
+    #Start Timer
     ${time_start}=                        Get Current Date                        result_format=epoch
+    Set Suite Variable                    ${time_start}
 
 Post New Result
     [Arguments]              ${tc_name}                  ${tc_status}                ${tc_message}
+
+    #Stop Timer and calculate time elapsed
+    ${time_end}=             Get Current Date            result_format=epoch
+    ${time_elapsed}=         Subtract Date From Date     ${time_end}               ${time_start}    result_format=compact
 
     IF                       ${needs_reporting}
         ${headers_result}=                               Create Dictionary           Authorization=${access_token}               Content-Type=application/json
@@ -74,6 +80,6 @@ Post New Result
 
         ${response_result}=                              Post On Session             postsession
         ...                  /rest/atm/1.0/testrun/${new_cycle_id}/testresults
-        ...                  data=[{"status": "${tc_status}" ,"testCaseKey": "${tc_key}" ,"comment": "${tc_message}" ,"executionTime": "1721"}]
+        ...                  data=[{"status": "${tc_status}" ,"testCaseKey": "${tc_key}" ,"comment": "${tc_message}" ,"executionTime": "${time_elapsed}"}]
         ...                  headers=${headers_result}
     END
