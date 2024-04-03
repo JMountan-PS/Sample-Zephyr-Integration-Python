@@ -63,6 +63,8 @@ Start New Test Cycle
         Set Suite Variable                               ${new_cycle_id}
     END
 
+    ${time_start}=                        Get Current Date                        result_format=epoch
+
 Post New Result
     [Arguments]              ${tc_name}                  ${tc_status}                ${tc_message}
 
