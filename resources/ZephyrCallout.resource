@@ -63,6 +63,7 @@ Start New Test Cycle
         Set Suite Variable                               ${new_cycle_id}
     END
 
+Start Test Case Timer
     #Start Timer
     ${time_start}=                        Get Current Date                        result_format=epoch
     Set Suite Variable                    ${time_start}
