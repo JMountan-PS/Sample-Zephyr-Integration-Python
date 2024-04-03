@@ -3,12 +3,15 @@ Library                      Collections
 Library                      String
 Library                      RequestsLibrary
 Library                      ExcelLibrary
+Library                      DateTime
 
 *** Variables ***
 ${access_token}
 ${new_cycle_id}
 ${needs_reporting}
 ${tc_key}
+${time_start}
+${time_end}
 
 *** Keywords ***
 Authorize Zephyr API
