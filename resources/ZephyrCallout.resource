@@ -69,7 +69,7 @@ Start Test Case Timer
     Set Suite Variable                    ${time_start}
 
 Post New Result
-    [Arguments]              ${tc_name}                  ${tc_status}                ${tc_message}
+    [Arguments]               ${tc_status}                ${tc_message}
 
     #Stop Timer and calculate time elapsed
     ${time_end}=             Get Current Date            result_format=epoch
