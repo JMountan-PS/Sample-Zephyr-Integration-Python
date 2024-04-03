@@ -2,7 +2,7 @@
 Library        DateTime
 Library        String
 
-#Impor Robot Framework "Listener"
+#Import Robot Framework "Listener"
 Resource        ../resources/ZephyrCallout.resource
 
 #These three will be needed to implement a "listener" using only RF syntax
