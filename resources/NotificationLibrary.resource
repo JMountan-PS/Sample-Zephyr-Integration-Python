@@ -20,7 +20,7 @@ ${replyTo}
 
 *** Keywords ***
 
-Notify Email Recipients Without Attached Reports
+Notify Email Recipients
     [Arguments]        ${suite_name}
     [Documentation]    Sends an email notification to everyone on the notify list to let them know test results
     ${subject}=        Set Variable       Test Suite "${suite_name}" Has Completed
