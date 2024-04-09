@@ -4,6 +4,9 @@ import zephyr_rest
 
 class ParamListener:
 
+    #Use the following command line option as a template for importing a listener:
+    #--listener	/home/executor/execution/Sample-Zephyr-Integration/libraries/ParamListener.py
+    
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
     ROBOT_LISTENER_API_VERSION = 3
 
